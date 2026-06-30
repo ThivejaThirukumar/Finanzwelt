@@ -1,0 +1,20 @@
+{
+  "AAPL": {
+    "name": "Apple",
+    "sektor": "Technologie",
+    "kurs": 189.0,
+    "aktien": 1000
+  },
+  "NESN": {
+    "name": "Nestl\u00e9",
+    "sektor": "Konsum",
+    "kurs": 98.0,
+    "aktien": 2000
+  },
+  "NOVN": {
+    "name": "Novartis",
+    "sektor": "Gesundheit",
+    "kurs": 87.0,
+    "aktien": 1500
+  }
+}
