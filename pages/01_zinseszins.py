@@ -1,5 +1,5 @@
 import streamlit as st
-import plotly.express as px 
+import plotly.express as px
 
 st.title("📈 Zinseszins-Rechner")
 
@@ -17,17 +17,22 @@ elif jahre < 1:
 else:
     st.metric("Endkapital", f"CHF {endkapital:,.0f}", f"+{gewinn:,.0f} CHF")
 
+# Chart
+jahre_liste = list(range(0, jahre + 1))
+werte = [kapital * (1 + zinssatz) ** j for j in jahre_liste]
+werte_ohne = [kapital + kapital * zinssatz * j for j in jahre_liste]
 
-jahre_liste = list(range(0, jahre + 1)) # X werte 
-werte = [kapital * (1 + zinssatz) ** j for j in jahre_liste] # Y Werte 
-werte_ohne = [kapital + kapital*zinssatz*j for j in jahre_liste]
+fig = px.line(x=jahre_liste, y=werte, title="Wachstum mit Zinseszins")
+fig.add_scatter(x=jahre_liste, y=werte_ohne, name="Ohne Zinseszins")
+st.plotly_chart(fig, use_container_width=True)
 
-fig = px.line(x=jahre_liste, y=werte, title = "Wachstum mit Zinseszins")
-fig.add_scatter(x = jahre_liste, y = werte_ohne, name = "Ohne Zinseszins")
-st.plotly_chart(fig, use_container_width = True) 
-
-with st.expander("Was ist Zinseszins?"):
-    st.write("Zinseszins bedeutet dass du Zinsen auf deine Zinsen bekommst. " \
-    "Im ersten Jahr verdienst du Zinsen nur auf dein Startkapital. " \
-    "Aber im zweiten Jahr verdienst du Zinsen auf dein Startkapital UND auf die Zinsen vom ersten Jahr. " \
-    "Das wiederholt sich jedes Jahr — und genau das lässt dein Geld immer schneller wachsen.")
+with st.expander("💡 Was ist Zinseszins?"):
+    st.write("""
+        Zinseszins bedeutet dass du Zinsen auf deine Zinsen bekommst.
+        Im ersten Jahr verdienst du Zinsen nur auf dein Startkapital.
+        Aber im zweiten Jahr verdienst du Zinsen auf dein Startkapital
+        UND auf die Zinsen vom ersten Jahr.
+        Das wiederholt sich jedes Jahr — und genau das lässt dein Geld
+        immer schneller wachsen. Albert Einstein soll es das
+        "achte Weltwunder" genannt haben.
+    """)
